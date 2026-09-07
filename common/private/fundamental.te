@@ -1,0 +1,8 @@
+# FundamentalOS: /data/misc/fundamental holds the Settings-managed keybox + target-uid list
+# read by the keystore2 attestation forge (per-app keybox attestation, Play Integrity DEVICE/STRONG).
+# keystore reads the config; the Settings app (system_app) writes it from the integrity config UI.
+allow keystore fundamental_data_file:dir search;
+allow keystore fundamental_data_file:file r_file_perms;
+
+allow system_app fundamental_data_file:dir { search open read write add_name remove_name getattr };
+allow system_app fundamental_data_file:file { create open read write getattr setattr rename unlink };
