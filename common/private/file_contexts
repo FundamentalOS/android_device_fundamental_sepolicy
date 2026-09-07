@@ -18,3 +18,4 @@
 
 # Bash
 /(system_ext|system/system_ext)/bin/bash          u:object_r:shell_exec:s0
+/data/misc/fundamental(/.*)?    u:object_r:fundamental_data_file:s0
