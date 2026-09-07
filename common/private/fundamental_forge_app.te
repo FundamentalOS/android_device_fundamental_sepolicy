@@ -1,0 +1,8 @@
+# FundamentalOS keybox fetching service: own UID (small attestationApplicationId
+# carrying the platform signature) + permission to write the keybox the forge reads.
+type fundamental_forge_app, domain;
+app_domain(fundamental_forge_app)
+net_domain(fundamental_forge_app)
+
+allow fundamental_forge_app fundamental_data_file:dir { search open read write add_name remove_name getattr };
+allow fundamental_forge_app fundamental_data_file:file { create open read write getattr setattr rename unlink };
