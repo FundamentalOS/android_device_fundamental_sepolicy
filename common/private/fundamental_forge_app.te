@@ -1,6 +1,9 @@
 # FundamentalOS keybox fetching service: own UID (small attestationApplicationId
 # carrying the platform signature) + permission to write the keybox the forge reads.
 type fundamental_forge_app, domain;
+# Android 17 (BOARD_API_LEVEL >= 202604) enforces that every platform app is labeled with a
+# coredomain type; the forge app lives on system_ext and is signed with the platform key.
+typeattribute fundamental_forge_app coredomain;
 app_domain(fundamental_forge_app)
 net_domain(fundamental_forge_app)
 
