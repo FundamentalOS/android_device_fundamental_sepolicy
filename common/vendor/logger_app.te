@@ -1,0 +1,11 @@
+# FundamentalOS debug-build fix (userdebug/eng only; no effect on user builds).
+# LineageOS inherits hardware/google/pixel-sepolicy/wifi_diagnostic (debug) via pixel-common-device.mk
+# but does NOT inherit PixelLogger.mk, whose logger_app/ dir declares the `logger_app` domain and the
+# `wifi_logging_data_file` type that wifi_diagnostic references (also dropping the wlan/perf_diag props
+# the full logger_app domain uses). Without these declarations a clean debug vendor_sepolicy compile
+# fails ("unknown type ..."). Declare exactly the two types wifi_diagnostic needs, minimally. No app or
+# daemon is assigned to logger_app (PixelLogger is not shipped); this only satisfies the compile.
+userdebug_or_eng(`
+  type logger_app, domain;
+  type wifi_logging_data_file, file_type, data_file_type, mlstrustedobject;
+')
