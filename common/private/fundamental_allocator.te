@@ -1,0 +1,4 @@
+# bionic's mimalloc backend reads /proc/sys/vm/overcommit_memory once per
+# process start to size its reservations. Every domain does it, so grant the
+# read globally instead of letting each process log an AVC denial.
+allow domain proc_overcommit_memory:file r_file_perms;
