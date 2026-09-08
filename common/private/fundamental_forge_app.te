@@ -6,3 +6,9 @@ net_domain(fundamental_forge_app)
 
 allow fundamental_forge_app fundamental_data_file:dir { search open read write add_name remove_name getattr };
 allow fundamental_forge_app fundamental_data_file:file { create open read write getattr setattr rename unlink };
+
+# The keybox fetch service behaves like a normal app: it needs the standard app-accessible system
+# services (ActivityManager, PowerManager+thermal, JobScheduler, ConnectivityManager, ...). These
+# are grouped under the app_api_service attribute, exactly as gmscore_app/bluetooth/nfc grant it.
+# keystore2 for the TEE-attested key is already granted to all appdomain by system/sepolicy app.te.
+allow fundamental_forge_app app_api_service:service_manager find;
